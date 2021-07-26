@@ -1,0 +1,103 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>
+        {% block page_header_title %}
+            مشخصات سازمان
+        {% endblock %}
+    </title>
+</head>
+
+{% block content %}
+    <div class="container" dir="rtl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid navbar-inner">
+                <div style="float:right">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                   href="{% url 'organizations:organizations-show' %}"><b>بازگشت</b></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">صدور پیش فاکتور</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'organizations:organizations-update' object.pk %}">ویرایش</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <h2>{{ object.brand }}</h2>
+        <div class="row">
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">استان</th>
+                            <th scope="col">تلفن</th>
+                            <th scope="col">تاریخ ثبت</th>
+                            <th scope="col">ثبت توسط</th>
+                            <th scope="col">تعداد کارگران(نفر)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">{{ object.state }}</th>
+                            <td>{{ object.landline }}</td>
+                            <td>{{ object.date_registration }}</td>
+                            <td>{{ object.registrar.get_full_name }}</td>
+                            <td>{{ object.workers }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row justify-content-md-center">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">محصولات</th>
+                            {% for products in object.organizations_info_products %}
+                                <td>{{ products }}</td>
+                            {% endfor %}
+                        </tr>
+                        <tr>
+                            <th scope="row">محصولات پیشنهادی</th>
+                            {% for products in object.related_products %}
+                                <td>{{ products }}</td>
+                            {% endfor %}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <table class="table">
+                    <thead>
+                    <tr class="table-dark">
+                        <th scope="col">#</th>
+                        <th scope="col" colspan="5">گزارش</th>
+                        <th scope="col" colspan="4">تاریخ</th>
+                        <th scope="col" colspan="3">کاربر</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

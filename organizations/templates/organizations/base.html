@@ -1,0 +1,68 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>
+        {% block page_header_title %}
+            صفحه اصلی
+        {% endblock %}
+    </title>
+</head>
+<body dir="rtl">
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid navbar-inner">
+            <div style="float:right">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><b>صفحه اصلی</b></a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'organizations:organizations-show' %}">
+                                    سازمان ها
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'organizations:organizations-add' %}">سازمان
+                                    جدید</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'goods:goods-show' %}">محصولات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'users:logout' %}">خروج</a>
+                            </li>
+                        {% endif %}
+                        {% if not user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'users:login' %}">ورود</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        {{ request.user.get_full_name }}
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row mb-4 mt-4">
+        {% block content %}YOUR CONTENT GOES HERE{% endblock %}
+    </div>
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    {% block page_scripts %}{% endblock %}
+</div>
+</body>
+</html>

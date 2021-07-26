@@ -1,0 +1,18 @@
+{% extends 'organizations/base.html' %}
+{% load static %}
+
+{% block page_header_title %}
+    ورود
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h2>لطفا وارد شوید</h2>
+        <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-outline-success" id="send-form">ورود</button>
+        </form>
+    </div>
+{% endblock %}

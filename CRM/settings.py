@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'organizations',
+    'goods',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +54,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'CRM.urls'
+
+LOGIN_REDIRECT_URL = '/'
 
 TEMPLATES = [
     {
