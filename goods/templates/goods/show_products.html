@@ -7,32 +7,32 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-    <div class="container">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">نام محصول</th>
-                <th scope="col">قیمت(تومان)</th>
-                <th scope="col">مشمول مالیات</th>
-                <th scope="col">دانلود کاتالوگ</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for product in object_list %}
+        <div class="container">
+            <table class="table">
+                <thead>
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="{% url 'goods:goods-update' product.pk %}">{{ product.name_product }}</a></td>
-                    <td>{{ product.price }}</td>
-                    <td>{% if product.includes_taxes %}✅{% else %}❎{% endif %}</td>
-                    <td>
-                        <a class="btn btn-outline-primary" href="#">DOWNLOAD</a>
-                    </td>
+                    <th scope="col">#</th>
+                    <th scope="col">نام محصول</th>
+                    <th scope="col">قیمت(تومان)</th>
+                    <th scope="col">مشمول مالیات</th>
+                    <th scope="col">دانلود کاتالوگ</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                {% for product in object_list %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td><a href="{% url 'goods:goods-update' product.pk %}">{{ product.name_product }}</a></td>
+                        <td>{{ product.price }}</td>
+                        <td>{% if product.includes_taxes %}✅{% else %}❎{% endif %}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="#">DOWNLOAD</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% include 'organizations/pagination.html' %}
     {% endif %}
     {% if not user.is_authenticated %}
