@@ -18,4 +18,5 @@ class AddOrganization(forms.ModelForm):
             'fullname_audience',
             'products',
             'email',
+            'phone_number',
         ]

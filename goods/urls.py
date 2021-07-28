@@ -1,11 +1,11 @@
 from django.urls import path
 
 from . import views
-from .views import GoodsShow, GoodsUpdate
+from .views import ProductsShow, GoodsUpdate
 
 app_name = 'goods'
 urlpatterns = [
-    path('products/', GoodsShow.as_view(), name='goods-show'),
+    path('products/', ProductsShow.as_view(), name='goods-show'),
     path('update/<int:pk>/', GoodsUpdate.as_view(), name='goods-update'),
-    path('download/<str:path>/', views.open_file, name='download-catalog'),
+    path('download/', views.download_file, name='download-catalog'),
 ]

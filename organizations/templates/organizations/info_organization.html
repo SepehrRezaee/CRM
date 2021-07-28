@@ -71,13 +71,30 @@
                         </tr>
                         <tr>
                             <th scope="row">محصولات پیشنهادی</th>
-                            {% for products in object.related_products %}
-                                <td>{{ products }}</td>
+                            {% for related in object.rel_products %}
+                                <td>{{ related }}</td>
                             {% endfor %}
                         </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">نام و نام خانوادگی مخاطب</th>
+                        <td>{{ object.fullname_audience }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">شماره تلفن مخاطب</th>
+                        <td>{{ object.phone_number }}</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <br><br>
