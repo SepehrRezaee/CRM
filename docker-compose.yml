@@ -5,7 +5,7 @@ services:
   database:
     image: "postgres:14beta2-buster"
     ports:
-    - 5432:5432
+      - 5432:5432
     environment:
       POSTGRES_USER: sepehrCRM
       POSTGRES_PASSWORD: 0024572926Sepehr@
@@ -13,5 +13,5 @@ services:
       POSTGRES_DB: maktabCRM
       PGDATA: /db_data
     volumes:
-    - StoreDbData:/db_data
+      - StoreDbData:/db_data
 

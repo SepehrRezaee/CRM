@@ -26,7 +26,7 @@
                         <td>{{ product.price }}</td>
                         <td>{% if product.includes_taxes %}✅{% else %}❎{% endif %}</td>
                         <td>
-{#                            <a class="btn btn-outline-primary" href="{% url 'goods:download-catalog' file_name="{{ product.pdf_catalog }}" %}">DOWNLOAD</a>#}
+                            <a class="btn btn-outline-primary" href="{{ product.pdf_catalog.url }}">DOWNLOAD</a>
                         </td>
                     </tr>
                 {% endfor %}
