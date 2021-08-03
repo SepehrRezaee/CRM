@@ -1,0 +1,51 @@
+{% extends 'organizations/base.html' %}
+{% load static %}
+<html lang="en">
+
+{% block page_header_title %}
+    نمایش فاکتورها
+{% endblock %}
+
+
+{% block content %}
+    <div class="container" dir="rtl">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">نام مشتری</th>
+                <th scope="col" colspan="4">دستگاه ها</th>
+                <th scope="col">خروجی PDF</th>
+                <th scope="col">عملیات</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in object_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td colspan="1">{{ product.owner.fullname_audience }}</td>
+                    <td colspan="4">
+                        <select class="form-select" size="3" aria-label="size 3 select example">
+                            {% for item in product.quoteitem_set.all %}
+                                <option value="{{ forloop.counter }}">{{ item.product }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <a class="btn btn-dark" href="{% url 'store:print-order' product.pk %}">
+                            PDF
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="#">ارسال به ایمیل مخاطب</a>
+                        <a class="btn btn-success" href="{% url 'store:add-quote-item' %}">افزودن دستگاه</a>
+                        <a class="btn btn-danger" href="{% url 'store:delete-quote' product.pk %}">حذف</a>
+                        <a class="btn btn-warning"
+                           href="{% url 'store:quote-item-show' product.pk %}">جزییات</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

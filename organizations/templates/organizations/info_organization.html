@@ -23,7 +23,8 @@
                                    href="{% url 'organizations:organizations-show' %}"><b>بازگشت</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">صدور پیش فاکتور</a>
+                                <a class="nav-link" href="{% url 'store:add-quote' object.pk %}">صدور پیش
+                                    فاکتور</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'organizations:organizations-update' object.pk %}">ویرایش</a>
@@ -71,7 +72,7 @@
                         </tr>
                         <tr>
                             <th scope="row">محصولات پیشنهادی</th>
-                            {% for related in object.rel_products %}
+                            {% for related in suggestion_product %}
                                 <td>{{ related }}</td>
                             {% endfor %}
                         </tr>

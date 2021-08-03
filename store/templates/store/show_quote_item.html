@@ -1,0 +1,58 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>
+        {% block page_header_title %}
+            نمایش آیتم های پیش فاکتور ها
+        {% endblock %}
+    </title>
+</head>
+
+{% block content %}
+    <div class="container" dir="rtl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid navbar-inner">
+                <div style="float:right">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                   href="{% url 'store:quote-show' %}"><b>بازگشت</b></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <h1>{{ object.owner.brand }}</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">نام دستگاه</th>
+                <th scope="col">تعداد</th>
+                <th scope="col">تخفیف(درصد)</th>
+                <th scope="col">قیمت نهایی (تومان)</th>
+                <th scope="col">عملیات</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in items %}
+                <tr>
+                    <td>{{ product.product }}</td>
+                    <td>{{ product.qty }}</td>
+                    <td>{{ product.discount }}</td>
+                    <td>{{ product.final_price }}</td>
+                    <td>
+                        <a class="btn btn-outline-danger" href="{% url 'store:delete-quote-item' product.pk %}">
+                            حذف
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
