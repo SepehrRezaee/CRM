@@ -18,7 +18,7 @@
                 {% for info in object_list %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><a href="{% url 'organizations:organizations-detail' info.pk %}">{{ info.brand }}</a></td>
+                        <td><a class="btn btn-outline-dark" href="{% url 'organizations:organizations-detail' info.pk %}">{{ info.brand }}</a></td>
                         <td>{{ info.registrar.get_full_name }}</td>
                         <td>{{ info.fullname_audience }}</td>
                         <td>

@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ab2fu0)x&5!714_4y(^t27kyr1k5iw!7$u0#b#wk6xr+(8ph&#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tehran'
 
 USE_I18N = True
 
@@ -134,11 +134,13 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+# DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+# ADMINS = [('Django', 'sepehr@localhost')]
 
-CELERY_EMAIL_TASK_CONFIG = {
-    'name': 'djcelery_email_send',
-    'ignore_result': True,
-}
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'django2021.1400@gmail.com'
+EMAIL_HOST_PASSWORD = 'sepehr007'
+EMAIL_USE_TLS = True

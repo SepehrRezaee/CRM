@@ -22,7 +22,7 @@
                 {% for product in object_list %}
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td><a href="{% url 'goods:goods-update' product.pk %}">{{ product.name_product }}</a></td>
+                        <td><a class="btn btn-warning" href="{% url 'goods:goods-update' product.pk %}">{{ product.name_product }}</a></td>
                         <td>{{ product.price }}</td>
                         <td>{% if product.includes_taxes %}✅{% else %}❎{% endif %}</td>
                         <td>

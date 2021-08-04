@@ -1,25 +1,24 @@
-{% load static %}
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>
         پیش فاکتور سازمان
         {{ object.owner.brand }}
     </title>
 </head>
-
-<div class="container" dir="rtl">
+<body>
+<div dir="rtl">
     <h1>
         سازمان:
         {{ object.owner.brand }}
     </h1>
     <h3>
         کارشناس فروش:
-        {{ request.user.get_full_name }}
+        {{ object.creator.get_full_name }}
     </h3>
-    <table>
+    <table class="table">
         <thead>
         <tr>
             <th scope="col">نام سازمان</th>
@@ -31,37 +30,45 @@
         <tr>
             <td>{{ object.owner.brand }}</td>
             <td>{{ object.owner.fullname_audience }}</td>
-            <td>{{ object.created.date.day }}</td>
+            <td>{{ object.created.date }}</td>
         </tr>
         </tbody>
     </table>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">نام دستگاه</th>
-            <th scope="col">تعداد</th>
-            <th scope="col">تخفیف(درصد)</th>
+            <th scope="col" colspan="1">#</th>
+            <th scope="col" colspan="1">نام دستگاه</th>
+            <th scope="col" colspan="1">تعداد</th>
+            <th scope="col" colspan="1">تخفیف(درصد)</th>
             <th scope="col">قیمت نهایی (تومان)</th>
         </tr>
         </thead>
         <tbody>
         {% for product in object.quoteitem_set.all %}
             <tr>
-                <td>{{ product.product }}</td>
-                <td>{{ product.qty }}</td>
-                <td>{{ product.discount }}</td>
+                <th scope="row" colspan="1">{{ forloop.counter }}</th>
+                <td colspan="1">{{ product.product }}</td>
+                <td colspan="1">{{ product.qty }}</td>
+                <td colspan="1">{{ product.discount }}</td>
                 <td>{{ product.final_price }}</td>
             </tr>
         {% endfor %}
         </tbody>
         <tfoot>
         <tr>
-            <td colspan="2">
+            <td colspan="3">
                 مبلغ قابل پرداخت:
                 {{ object.get_grand_total }}
                 تومان
+            </td>
+            <td colspan="3">
+                میزان مالیات:
+                9%
             </td>
         </tr>
         </tfoot>
     </table>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>

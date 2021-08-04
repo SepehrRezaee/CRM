@@ -23,7 +23,11 @@
             {% for product in object_list %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td colspan="1">{{ product.owner.fullname_audience }}</td>
+                    <td colspan="1">
+                        <b>{{ product.owner.brand }}</b>
+                        <br>
+                        {{ product.owner.fullname_audience }}
+                    </td>
                     <td colspan="4">
                         <select class="form-select" size="3" aria-label="size 3 select example">
                             {% for item in product.quoteitem_set.all %}
@@ -37,7 +41,8 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="#">ارسال به ایمیل مخاطب</a>
+                        <a class="btn btn-primary" href="{% url 'organizations:send-email' product.pk %}">ارسال به ایمیل مخاطب</a>
+{#                        <a class="btn btn-primary" href="{% url 'organizations:send-email' %}">ارسال به ایمیل مخاطب</a>#}
                         <a class="btn btn-success" href="{% url 'store:add-quote-item' %}">افزودن دستگاه</a>
                         <a class="btn btn-danger" href="{% url 'store:delete-quote' product.pk %}">حذف</a>
                         <a class="btn btn-warning"
@@ -48,4 +53,5 @@
             </tbody>
         </table>
     </div>
+    {% include 'organizations/pagination.html' %}
 {% endblock %}

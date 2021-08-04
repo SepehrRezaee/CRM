@@ -14,4 +14,8 @@ services:
       PGDATA: /db_data
     volumes:
       - StoreDbData:/db_data
-
+  mailhog:
+    image: "mailhog/mailhog"
+    ports:
+      - 1025:1025
+      - 8025:8025
