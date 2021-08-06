@@ -24,8 +24,7 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td colspan="1">
-                        <b>{{ product.owner.brand }}</b>
-                        <br>
+                        <h4><b>{{ product.owner.brand }}</b></h4>
                         {{ product.owner.fullname_audience }}
                     </td>
                     <td colspan="4">
@@ -41,9 +40,8 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{% url 'organizations:send-email' product.pk %}">ارسال به ایمیل مخاطب</a>
-{#                        <a class="btn btn-primary" href="{% url 'organizations:send-email' %}">ارسال به ایمیل مخاطب</a>#}
-                        <a class="btn btn-success" href="{% url 'store:add-quote-item' %}">افزودن دستگاه</a>
+                        <a class="btn btn-primary" href="{% url 'organizations:send-email' product.pk %}">ارسال به ایمیل
+                            مخاطب</a>
                         <a class="btn btn-danger" href="{% url 'store:delete-quote' product.pk %}">حذف</a>
                         <a class="btn btn-warning"
                            href="{% url 'store:quote-item-show' product.pk %}">جزییات</a>
@@ -53,5 +51,13 @@
             </tbody>
         </table>
     </div>
-    {% include 'organizations/pagination.html' %}
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">{% include 'organizations/pagination.html' %}</div>
+            <div class="col">
+                <a class="btn btn-success" href="{% url 'store:add-quote-item' %}">افزودن دستگاه</a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
