@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ab2fu0)x&5!714_4y(^t27kyr1k5iw!7$u0#b#wk6xr+(8ph&#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
@@ -35,8 +35,10 @@ INSTALLED_APPS = [
 
     'celery',
     'djcelery_email',
+    'rest_framework',
 
     'organizations',
+    'follow_up',
     'goods',
     'store',
     'users',
@@ -141,3 +143,16 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'django2021.1400@gmail.com'
 EMAIL_HOST_PASSWORD = 'sepehr007'
 EMAIL_USE_TLS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ]
+}

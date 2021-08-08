@@ -16,6 +16,16 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+from users import views as users_views
+from organizations import views as organizations_views
+from goods import views as goods_views
+
+router = DefaultRouter()
+router.register('organizations', organizations_views.OwnOrganizations)
+router.register('goods/product/', goods_views.OwnProduct)
+router.register('goods/organization_product/', goods_views.OwnOrganizationProduct)
+router.register('users', users_views.UserViewSet)
 
 urlpatterns = [
                   path('admin/', admin.site.urls),
@@ -23,4 +33,6 @@ urlpatterns = [
                   path('goods/', include('goods.urls')),
                   path('users/', include('users.urls')),
                   path('store/', include('store.urls')),
+                  path('api-auth/', include('rest_framework.urls')),
+                  path('api/v1/', include(router.urls)),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
