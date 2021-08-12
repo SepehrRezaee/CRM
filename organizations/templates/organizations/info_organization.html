@@ -26,6 +26,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'organizations:organizations-update' object.pk %}">ویرایش</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'store:add-quote' object.pk %}">ایجاد پیش فاکتور</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'follow_up:show-follow-up' object.pk %}">پیگیری ها</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -90,25 +96,6 @@
                     <tr>
                         <th scope="row">شماره تلفن مخاطب</th>
                         <td>{{ object.phone_number }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <br><br>
-        <div class="container">
-            <div class="row justify-content-md-center">
-                <table class="table">
-                    <thead>
-                    <tr class="table-dark">
-                        <th scope="col">#</th>
-                        <th scope="col" colspan="5">گزارش</th>
-                        <th scope="col" colspan="4">تاریخ</th>
-                        <th scope="col" colspan="3">کاربر</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
                     </tr>
                     </tbody>
                 </table>

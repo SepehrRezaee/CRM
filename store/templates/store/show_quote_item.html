@@ -29,14 +29,17 @@
             </div>
         </nav>
         <h1>{{ object.owner.brand }}</h1>
-        <h5>({{ object.created.date }})</h5>
+        <h5>({{ object.slug }})</h5>
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">نام دستگاه</th>
                 <th scope="col">تعداد</th>
+                <th scope="col" colspan="1">قیمت پایه</th>
+                <th scope="col" colspan="1">مشمول مالیات</th>
+                <th scope="col">قیمت نهایی(قبل از مالیات و تخفیف)</th>
                 <th scope="col">تخفیف(درصد)</th>
-                <th scope="col">قیمت نهایی (تومان)</th>
+                <th scope="col">قیمت نهایی (بعد از مالیات و تخفیف)</th>
                 <th scope="col">عملیات</th>
             </tr>
             </thead>
@@ -45,8 +48,26 @@
                 <tr>
                     <td>{{ product.product }}</td>
                     <td>{{ product.qty }}</td>
+                    <td colspan="1">
+                        {{ product.product.price }}
+                        تومان
+                    </td>
+                    <td>
+                        {% if product.product.includes_taxes %}
+                            ✔
+                        {% else %}
+                            ✖
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ product.total }}
+                        تومان
+                    </td>
                     <td>{{ product.discount }}</td>
-                    <td>{{ product.final_price }}</td>
+                    <td>
+                        {{ product.final_price }}
+                        تومان
+                    </td>
                     <td>
                         <a class="btn btn-outline-danger" href="{% url 'store:delete-quote-item' product.pk %}">
                             حذف

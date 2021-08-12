@@ -21,6 +21,8 @@ from users import views as users_views
 from organizations import views as organizations_views
 from goods import views as goods_views
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 router = DefaultRouter()
 router.register('organizations', organizations_views.OwnOrganizations)
 router.register('goods/product/', goods_views.OwnProduct)
@@ -33,6 +35,9 @@ urlpatterns = [
                   path('goods/', include('goods.urls')),
                   path('users/', include('users.urls')),
                   path('store/', include('store.urls')),
+                  path('follow_up/', include('follow_up.urls')),
                   path('api-auth/', include('rest_framework.urls')),
                   path('api/v1/', include(router.urls)),
+                  path('api/token/', TokenObtainPairView.as_view()),
+                  path('api/token/refresh/', TokenRefreshView.as_view()),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

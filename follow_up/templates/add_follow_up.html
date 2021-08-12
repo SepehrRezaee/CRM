@@ -4,7 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link href="https://code.jquery.com/jquery-3.6.0.min.js" rel="stylesheet">
     <title>
         {% block page_header_title %}
             ثبت پیگیری
@@ -12,63 +11,72 @@
     </title>
 </head>
 
-{% block content %}
-    <div class="container" dir="rtl">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid navbar-inner">
-                <div style="float:right">
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page"
-                                   href="{% url 'organizations:organizations-show' %}"><b>بازگشت</b></a>
-                            </li>
-                        </ul>
-                    </div>
+<body>
+<div class="container" dir="rtl">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid navbar-inner">
+            <div style="float:right">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{% url 'organizations:organizations-show' %}"><b>بازگشت</b></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </nav>
-        <form class="form">
+        </div>
+    </nav>
+    <div class="justify-content-center">
+        <form class="form">{% csrf_token %}
             <label for="query"></label>
-            <input type="text" id="query">
-            <select id="organization" class="form-select" aria-label="Default select example">
-                <option value="contains"></option>
-                <option value="startswith">{% trans 'با این عدد شروع شود' %}</option>
-                <option value="endswith">{% trans 'با این عدد تمام شود' %}</option>
-                <option value="exact">{% trans 'دقیقا همین عدد باشد' %}</option>
-            </select>
+            <textarea id="query" cols="50" rows="5" maxlength="250" name="content"
+                      placeholder="پیگیری خود را این جا بنویسید.."></textarea>
         </form>
-        <button id="register" class="btn btn-outline-dark" type="submit">ثبت</button>
+        <button id="register" class="btn btn-dark">ثبت</button>
     </div>
-{% endblock %}
-
-{% block page_scripts %}
-    <script>
-        $(document).ready(function () {
-            $('#register').click(function () {
-                console.log("hello");
-                var query_text = $('#query').val();
-                var type_search = $('#type_search option:selected').val();
-                var ajax_config = {
-                    url: '/find/',
-                    data: {
-                        num: query_text,
-                        type_search: type_search
-                    },
-                    method: 'get',
-                    success: function (response) {
-                        var my_output_div = $('#output-div');
-                        my_output_div.empty();
-                        $(response.results).each(function (index, obj) {
-                            var my_table = '<tr><th scope="row">' + (index + 1) + '</th>' +
-                                '<td>' + obj.first_name + '</td><td>' + obj.last_name + '</td>' +
-                                '<td>' + obj.phone_number + '</td></tr>';
-                            my_output_div.append(my_table);
-                        });
-                    },
-                };
-                $.ajax(ajax_config);
-            });
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    $(document).ready(function () {
+        const csrftoken = getCookie('csrftoken');
+        $('#register').click(function () {
+            var content = $('#query').val();
+            var ajax_config = {
+                url: "{% url 'follow_up:create-follow-up' pk %}",
+                headers: {'X-CSRFToken': csrftoken},
+                data: {
+                    content: content,
+                },
+                method: 'POST',
+                success: function (response) {
+                    alert('اطلاعات  پیگیری با موفقیت ثبت شد👌');
+                    {#window.location.href = "{% url 'organizations:organizations-show' %}";#}
+                },
+                error: function (response) {
+                    alert('اطلاعات نادرست است😱')
+                },
+            };
+            $.ajax(ajax_config);
         });
-    </script>
-{% endblock %}
+    });
+</script>
+</body>
+
+
+

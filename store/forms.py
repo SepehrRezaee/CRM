@@ -12,15 +12,18 @@ class QuoteItemForm(forms.ModelForm):
         model = QuoteItem
         fields = [
             'product',
-            'pre_quote',
             'qty',
             'discount',
         ]
 
 
 class QuoteForm(forms.ModelForm):
+    """
+    Add some fields for create a quote item for an quote
+    """
+
     class Meta:
         model = Quote
         fields = [
-            'owner',
+            'slug',
         ]

@@ -1,0 +1,53 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>
+        {% block page_header_title %}
+            نمایش پیگیری
+        {% endblock %}
+    </title>
+</head>
+
+{% block content %}
+    <div class="container" dir="rtl">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid navbar-inner">
+                <div style="float:right">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page"
+                                   href="{% url 'organizations:organizations-show' %}"><b>بازگشت</b></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="row justify-content-md-center">
+            <table class="table">
+                <thead>
+                <tr class="table-dark">
+                    <th scope="col">#</th>
+                    <th scope="col">گزارش</th>
+                    <th scope="col">تاریخ</th>
+                    <th scope="col">کاربر</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for content in object_list %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <td>{{ content.content }}</td>
+                        <td>{{ content.register_on }}</td>
+                        <td>{{ content.registrar.get_full_name }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -24,7 +24,10 @@
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td colspan="1">
-                        <h4><b>{{ product.owner.brand }}</b></h4>
+                        <h4><b>
+                            {{ product.owner.brand }}
+                        </b></h4>
+                        <h6>({{ product.slug }})</h6>
                         {{ product.owner.fullname_audience }}
                     </td>
                     <td colspan="4">
@@ -40,24 +43,24 @@
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{% url 'organizations:send-email' product.pk %}">ارسال به ایمیل
-                            مخاطب</a>
-                        <a class="btn btn-danger" href="{% url 'store:delete-quote' product.pk %}">حذف</a>
-                        <a class="btn btn-warning"
-                           href="{% url 'store:quote-item-show' product.pk %}">جزییات</a>
+                        <a class="btn btn-primary" href="{% url 'organizations:send-email' product.pk %}">
+                            ارسال به ایمیل
+                            مخاطب
+                        </a>
+                        <a class="btn btn-danger" href="{% url 'store:delete-quote' product.pk %}">
+                            حذف
+                        </a>
+                        <a class="btn btn-success" href="{% url 'store:add-quote-item' product.pk %}">
+                            افزودن دستگاه
+                        </a>
+                        <a class="btn btn-warning" href="{% url 'store:quote-item-show' product.pk %}">
+                            جزییات
+                        </a>
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
-    <div class="container">
-        <div class="row">
-            <div class="col"></div>
-            <div class="col">{% include 'organizations/pagination.html' %}</div>
-            <div class="col">
-                <a class="btn btn-success" href="{% url 'store:add-quote-item' %}">افزودن دستگاه</a>
-            </div>
-        </div>
-    </div>
+    {% include 'organizations/pagination.html' %}
 {% endblock %}

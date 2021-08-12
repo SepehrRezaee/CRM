@@ -22,7 +22,7 @@
                         <td>{{ info.registrar.get_full_name }}</td>
                         <td>{{ info.fullname_audience }}</td>
                         <td>
-                            <button class="btn btn-outline-primary"><a>ثبت پیگیری</a></button>
+                            <a class="btn btn-outline-primary" href="{% url 'follow_up:create-follow-up' info.pk %}">ثبت پیگیری</a>
                         </td>
                     </tr>
                 {% endfor %}
