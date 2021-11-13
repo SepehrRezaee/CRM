@@ -1,2 +1,2 @@
 # CRM
-A simple Customer Relationship Management software
+A Simple Customer Relationship Management software
